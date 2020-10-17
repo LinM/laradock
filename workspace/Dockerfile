@@ -56,6 +56,10 @@ RUN if [ ${CHANGE_SOURCE} = true ]; then \
     rm -rf /tmp/sources.sh \
 ;fi
 
+ENV http_proxy  http://host.docker.internal:1080
+ENV https_proxy http://host.docker.internal:1080
+ENV no_proxy    .aliyuncs.com,.aliyun.com,.taobao.org,.tsinghua.edu.cn,.163.com,localhost
+RUN pear config-set http_proxy  http://host.docker.internal:1080
 # always run apt update when start and after add new source list, then clean up at end.
 RUN set -xe; \
     apt-get update -yqq && \
@@ -1500,6 +1504,11 @@ USER root
 #
 
 USER root
+
+ENV http_proxy  ''
+ENV https_proxy ''
+ENV no_proxy    ''
+RUN pear config-set http_proxy ''
 
 # Clean up
 RUN apt-get clean && \
