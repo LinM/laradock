@@ -277,6 +277,101 @@ services:
       links:
         - docker-in-docker
 
+
+### PHP-FPM 5.6 ###########################################
+    php-fpm56:
+      build:
+        context: ./php-fpm56
+        args:
+          - CHANGE_SOURCE=${CHANGE_SOURCE}
+          - BASE_IMAGE_TAG_PREFIX=${PHP_FPM_BASE_IMAGE_TAG_PREFIX}
+          - LARADOCK_PHP_VERSION=5.6
+          - LARADOCK_PHALCON_VERSION=${PHALCON_VERSION}
+          - INSTALL_BZ2=false
+          - INSTALL_GMP=false
+          - INSTALL_XDEBUG=true
+          - INSTALL_PCOV=false
+          - INSTALL_PHPDBG=false
+          - INSTALL_BLACKFIRE=false
+          - INSTALL_SSH2=false
+          - INSTALL_SOAP=false
+          - INSTALL_XSL=true
+          - INSTALL_SMB=false
+          - INSTALL_IMAP=false
+          - INSTALL_MONGO=false
+          - INSTALL_AMQP=false
+          - INSTALL_CASSANDRA=false
+          - INSTALL_GEARMAN=false
+          - INSTALL_MSSQL=false
+          - INSTALL_BCMATH=true
+          - INSTALL_PHPREDIS=false
+          - INSTALL_MEMCACHED=false
+          - INSTALL_OPCACHE=true
+          - INSTALL_EXIF=false
+          - INSTALL_AEROSPIKE=false
+          - INSTALL_OCI8=false
+          - INSTALL_MYSQL=true
+          - INSTALL_MYSQLI=true
+          - INSTALL_PGSQL=false
+          - INSTALL_PG_CLIENT=false
+          - INSTALL_POSTGIS=false
+          - INSTALL_INTL=true
+          - INSTALL_GHOSTSCRIPT=false
+          - INSTALL_LDAP=false
+          - INSTALL_PHALCON=false
+          - INSTALL_SWOOLE=false
+          - INSTALL_TAINT=false
+          - INSTALL_IMAGE_OPTIMIZERS=true
+          - INSTALL_IMAGEMAGICK=true
+          - INSTALL_CALENDAR=false
+          - INSTALL_FAKETIME=false
+          - INSTALL_IONCUBE=false
+          - INSTALL_APCU=false
+          - INSTALL_CACHETOOL=false
+          - INSTALL_YAML=false
+          - INSTALL_RDKAFKA=false
+          - INSTALL_GETTEXT=false
+          - INSTALL_ADDITIONAL_LOCALES=false
+          - INSTALL_MYSQL_CLIENT=false
+          - INSTALL_PING=false
+          - INSTALL_SSHPASS=false
+          - INSTALL_MAILPARSE=false
+          - INSTALL_PCNTL=false
+          - ADDITIONAL_LOCALES="en_US.UTF-8 es_ES.UTF-8 fr_FR.UTF-8"
+          - INSTALL_FFMPEG=false
+          - INSTALL_WKHTMLTOPDF=false
+          - INSTALL_XHPROF=false
+          - INSTALL_XMLRPC=false
+          - DOWNGRADE_OPENSSL_TLS_AND_SECLEVEL=${PHP_DOWNGRADE_OPENSSL_TLS_AND_SECLEVEL}
+          - PUID=${PHP_FPM_PUID}
+          - PGID=${PHP_FPM_PGID}
+          - LOCALE=POSIX
+          - http_proxy
+          - https_proxy
+          - no_proxy
+      volumes:
+        - ./php-fpm56/php5.6.ini:/usr/local/etc/php/php.ini
+        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
+        - docker-in-docker:/certs/client
+      expose:
+        - "9000"
+      extra_hosts:
+        - "dockerhost:${DOCKER_HOST_IP}"
+        - "service.dome88.one:172.19.0.7"
+      environment:
+        - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
+        - DOCKER_HOST=tcp://docker-in-docker:2376
+        - DOCKER_TLS_VERIFY=1
+        - DOCKER_TLS_CERTDIR=/certs
+        - DOCKER_CERT_PATH=/certs/client
+        - FAKETIME=${PHP_FPM_FAKETIME}
+      depends_on:
+        - workspace
+      networks:
+        - backend
+      links:
+        - docker-in-docker
+
 ### PHP Worker ############################################
     php-worker:
       build:
