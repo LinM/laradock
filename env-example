@@ -924,3 +924,7 @@ GEARMAN_MYSQL_TABLE=gearman_queue
 
 ### ELK Stack ##################################################
 ELK_VERSION=7.9.1
+
+### golang ############
+GO_CODE_PATH_HOST=./golang/src
+GO_CODE_PATH_CONTAINER=/go/src

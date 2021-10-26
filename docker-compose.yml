@@ -1910,3 +1910,20 @@ services:
         - ${DATA_PATH_HOST}/tomcat/logs:/usr/local/tomcat/logs
       # restart: always
 
+### golang #############
+    golang:
+      build:
+        context: ./golang
+        args:
+          - http_proxy
+          - https_proxy
+          - no_proxy
+      volumes:
+        - ${GO_CODE_PATH_HOST}:${GO_CODE_PATH_CONTAINER}
+      expose:
+        - "10101"
+      stdin_open: true
+      tty: true
+      networks:
+        - frontend
+        - backend
