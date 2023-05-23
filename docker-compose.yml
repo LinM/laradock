@@ -1920,8 +1920,8 @@ services:
           - no_proxy
       volumes:
         - ${GO_CODE_PATH_HOST}:${GO_CODE_PATH_CONTAINER}
-      expose:
-        - "10101"
+      ports:
+        - "10101:80"
       stdin_open: true
       tty: true
       networks:
