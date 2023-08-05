@@ -7,7 +7,7 @@ weight: 2
 ## Requirements
 
 - [Git](https://git-scm.com/downloads)
-- [Docker](https://www.docker.com/products/docker/) [ >= 17.12 ]
+- [Docker](https://www.docker.com/products/docker-desktop/) [ >= 19.03.0 ]
 
 
 
@@ -75,7 +75,7 @@ Your folder structure should look like this:
 We'll need to do step 1 of the [Usage](#Usage) section now to make this happen.
 
 ```
-cp env-example .env
+cp .env.example .env
 ```
 
 At the top, change the `APP_CODE_PATH_HOST` variable to your project path.
@@ -105,6 +105,12 @@ Your folder structure should look like this:
 * laradock
 * project-1
 * project-2
+```
+
+Make sure the `APP_CODE_PATH_HOST` variable points to parent directory.
+
+```
+APP_CODE_PATH_HOST=../
 ```
 
 2 - Go to your web server and create config files to point to different project directory when visiting different domains:
@@ -142,23 +148,23 @@ If you use Chrome 63 or above for development, don't use `.dev`. [Why?](https://
 
 If you are using **Docker Toolbox** (VM), do one of the following:
 
-- Upgrade to Docker [Native](https://www.docker.com/products/docker) for Mac/Windows (Recommended). Check out [Upgrading Laradock](/documentation/#upgrading-laradock)
+- Upgrade to [Docker Desktop](https://www.docker.com/products/docker-desktop/) for Mac/Windows (Recommended). Check out [Upgrading Laradock](/documentation/#upgrading-laradock)
 - Use Laradock v3.\*. Visit the [Laradock-ToolBox](https://github.com/laradock/laradock/tree/LaraDock-ToolBox) branch. *(outdated)*
 
 <br>
 
-We recommend using a Docker version which is newer than 1.13. 
+We recommend using a Docker Engine version which is newer than 19.03.0.
 
 <br>
 
->**Warning:** If you used an older version of Laradock it's highly recommended to rebuild the containers you need to use [see how you rebuild a container](#Build-Re-build-Containers) in order to prevent as much errors as possible.
+>**Warning:** If you used an older version of Laradock it's highly recommended to rebuild the containers you need to use [see how you rebuild a container](/documentation/#Build-Re-build-Containers) in order to prevent as much errors as possible.
 
 <br>
 
-1 - Enter the laradock folder and copy `env-example` to `.env`
+1 - Enter the laradock folder and copy `.env.example` to `.env`
 
 ```shell
-cp env-example .env
+cp .env.example .env
 ```
 
 You can edit the `.env` file to choose which software's you want to be installed in your environment. You can always refer to the `docker-compose.yml` file to see how those variables are being used.
